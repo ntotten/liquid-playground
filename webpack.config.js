@@ -29,7 +29,7 @@ module.exports = {
     new MonacoWebpackPlugin(),
     new HtmlWebpackPlugin({ template: "index.html" }),
     new CopyPlugin({
-      patterns: [{ from: "src/samples", to: "dist/samples" }],
+      patterns: [{ from: "src/samples", to: "samples" }],
     }),
   ],
 };
