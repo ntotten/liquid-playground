@@ -372,25 +372,38 @@ function load() {
   window.onhashchange = parseHash;
   parseHash(true);
 
+  function handleLiquidError(error) {
+    console.error(error);
+    writePreview(error.stack, "error");
+  }
+
+  function writePreview(code, html) {
+    var model = monaco.editor.createModel(code, "html");
+    runEditor.setModel(model);
+    var doc = iframeContainer.contentWindow.document;
+    doc.open();
+    doc.write(html || code);
+    doc.close();
+  }
+
   function run() {
     const engine = new Liquid();
-    const tpl = engine.parse(data.html.model.getValue());
-    const v = JSON.parse(data.json.model.getValue());
-    engine.render(tpl, v).then(
-      function (value) {
-        var model = monaco.editor.createModel(value, "html");
-        runEditor.setModel(model);
+    let tpl;
+    try {
+      tpl = engine.parse(data.html.model.getValue());
+    } catch (err) {
+      handleLiquidError(err);
+    }
+    let v;
+    try {
+      v = JSON.parse(data.json.model.getValue());
+    } catch (err) {
+      handleLiquidError(err);
+    }
 
-        var doc = iframeContainer.contentWindow.document;
-        doc.open();
-        doc.write(value);
-        doc.close();
-      },
-      function (error) {
-        console.log(error);
-        runEditor.setModel("");
-      }
-    );
+    if (tpl && v) {
+      engine.render(tpl, v).then(writePreview).catch(handleLiquidError);
+    }
   }
 
   editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, run);
