@@ -41,4 +41,10 @@
 
 .run-container {
   border: 1px solid #999;
+  border-top: 0;
+}
+
+.iframe-container {
+  border: 1px solid #999;
+  border-top: 0;
 }

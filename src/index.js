@@ -71,14 +71,34 @@ function load() {
       });
     }
 
+    previewContainer.style.position = "absolute";
+    previewContainer.style.top =
+      GLOBAL_PADDING + TITLE_HEIGHT + SWITCHER_HEIGHT + "px";
+    previewContainer.style.left =
+      GLOBAL_PADDING + INNER_PADDING + HALF_WIDTH + "px";
+    previewContainer.style.width = HALF_WIDTH + "px";
+    previewContainer.style.height = REMAINING_HEIGHT + "px";
+
+    previewTabArea.style.position = "absolute";
+    previewTabArea.style.boxSizing = "border-box";
+    previewTabArea.style.top = 0;
+    previewTabArea.style.left = 0;
+    previewTabArea.style.width = HALF_WIDTH + "px";
+    previewTabArea.style.height = TABS_HEIGHT + "px";
+
     runContainer.style.position = "absolute";
     runContainer.style.boxSizing = "border-box";
-    runContainer.style.top =
-      GLOBAL_PADDING + TITLE_HEIGHT + SWITCHER_HEIGHT + TABS_HEIGHT + "px";
-    runContainer.style.left =
-      GLOBAL_PADDING + INNER_PADDING + HALF_WIDTH + "px";
+    runContainer.style.top = TABS_HEIGHT + "px";
+    runContainer.style.left = 0;
     runContainer.style.width = HALF_WIDTH + "px";
     runContainer.style.height = REMAINING_HEIGHT - TABS_HEIGHT + "px";
+
+    iframeContainer.style.position = "absolute";
+    iframeContainer.style.boxSizing = "border-box";
+    iframeContainer.style.top = TABS_HEIGHT + "px";
+    iframeContainer.style.left = 0;
+    iframeContainer.style.width = HALF_WIDTH + "px";
+    iframeContainer.style.height = REMAINING_HEIGHT - TABS_HEIGHT + "px";
 
     if (runEditor) {
       runEditor.layout({
@@ -109,6 +129,24 @@ function load() {
     editor.setModel(data[desiredModelId].model);
     editor.restoreViewState(data[desiredModelId].state);
     editor.focus();
+  }
+
+  function changePreviewTab(selectedTabNode, desiredTabName) {
+    for (var i = 0; i < previewTabArea.childNodes.length; i++) {
+      var child = previewTabArea.childNodes[i];
+      if (/tab/.test(child.className)) {
+        child.className = "tab";
+      }
+    }
+    selectedTabNode.className = "tab active";
+
+    if (desiredTabName === "html") {
+      iframeContainer.style.display = "none";
+      runContainer.style.display = "block";
+    } else if (desiredTabName === "preview") {
+      iframeContainer.style.display = "block";
+      runContainer.style.display = "none";
+    }
   }
 
   // create the typing side
@@ -158,8 +196,44 @@ function load() {
   typingContainer.appendChild(tabArea);
   typingContainer.appendChild(editorContainer);
 
+  // create the preview side
+  var previewContainer = document.createElement("div");
+  previewContainer.className = "previewContainer";
+
+  var previewTabArea = (function () {
+    var previewTabArea = document.createElement("div");
+    previewTabArea.className = "tabArea";
+
+    var htmlTab = document.createElement("span");
+    htmlTab.className = "tab active";
+    htmlTab.appendChild(document.createTextNode("HTML"));
+    htmlTab.onclick = function () {
+      changePreviewTab(htmlTab, "html");
+    };
+    previewTabArea.appendChild(htmlTab);
+
+    var previewTab = document.createElement("span");
+    previewTab.className = "tab";
+    previewTab.appendChild(document.createTextNode("Preview"));
+    previewTab.onclick = function () {
+      changePreviewTab(previewTab, "preview");
+    };
+    previewTabArea.appendChild(previewTab);
+
+    return previewTabArea;
+  })();
+
   var runContainer = document.createElement("div");
   runContainer.className = "run-container";
+
+  var iframeContainer = document.createElement("iframe");
+  iframeContainer.className = "iframe-container";
+  iframeContainer.style = "display: none;";
+  iframeContainer.src = "samples/preview.html";
+
+  previewContainer.appendChild(previewTabArea);
+  previewContainer.appendChild(runContainer);
+  previewContainer.appendChild(iframeContainer);
 
   var sampleSwitcher = document.createElement("select");
   var sampleChapter;
@@ -245,7 +319,7 @@ function load() {
 
   playgroundContainer.appendChild(sampleSwitcher);
   playgroundContainer.appendChild(typingContainer);
-  playgroundContainer.appendChild(runContainer);
+  playgroundContainer.appendChild(previewContainer);
 
   data.json.model = monaco.editor.createModel("{ }", "json");
   data.html.model = monaco.editor.createModel("html", "html");
@@ -306,6 +380,11 @@ function load() {
       function (value) {
         var model = monaco.editor.createModel(value, "html");
         runEditor.setModel(model);
+
+        var doc = iframeContainer.contentWindow.document;
+        doc.open();
+        doc.write(value);
+        doc.close();
       },
       function (error) {
         console.log(error);
