@@ -2,4 +2,4 @@ Try Liquid
 
 A simple tool for testing out Liquid templates.
 
-<tryliquid.dev>
+https://tryliquid.dev
