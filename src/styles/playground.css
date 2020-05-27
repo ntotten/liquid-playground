@@ -1,0 +1,44 @@
+.tabArea {
+  height: 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #999;
+}
+.tab {
+  height: 20px;
+  line-height: 20px;
+  box-sizing: border-box;
+  color: #999;
+  padding: 0 8px;
+  border: 1px solid #999;
+  border-bottom: 0;
+  cursor: pointer;
+  float: left;
+}
+.tab.active {
+  color: black;
+  border-bottom: 1px solid white;
+}
+.action {
+  height: 20px;
+  line-height: 20px;
+  box-sizing: border-box;
+  color: black;
+  padding: 0 5px;
+  border: 1px solid #999;
+  border-bottom: 0;
+  cursor: pointer;
+  float: right;
+  padding-left: 16px;
+}
+.action.run {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAE1JREFUOE9jKCsrY6AEU6QZZPHgNeA/0Hn7gdiBUPjg8gLIABjGaxAxBuA1iBQDYAalIXuLFAOweoUYA8gOA4pigegERrRCXOlhGBgAAGmggVf7bEk0AAAAAElFTkSuQmCC")
+    no-repeat left center;
+}
+.editor-container {
+  border: 1px solid #999;
+  border-top: 0;
+}
+
+.run-container {
+  border: 1px solid #999;
+}
