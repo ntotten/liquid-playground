@@ -187,6 +187,16 @@ function load() {
     };
     tabArea.appendChild(runBtn);
 
+    var shareBtn = document.createElement("button");
+    shareBtn.className = "action run";
+    shareBtn.setAttribute("role", "button");
+    shareBtn.setAttribute("aria-label", runLabel);
+    shareBtn.appendChild(document.createTextNode("Share"));
+    shareBtn.onclick = function () {
+      share();
+    };
+    tabArea.appendChild(shareBtn);
+
     return tabArea;
   })();
 
@@ -337,9 +347,16 @@ function load() {
     },
   });
 
-  var currentToken = 0;
-  function parseHash(firstTime) {
-    var sampleId = window.location.hash.replace(/^#/, "");
+  function loadContentFromHash(content) {
+    var json = atob(content);
+    var model = JSON.parse(json);
+    data.json.model.setValue(model.json);
+    data.html.model.setValue(model.html);
+    editor.setScrollTop(0);
+    run();
+  }
+
+  function loadSampleFromHash(firstTime, sampleId) {
     if (!sampleId) {
       sampleId = PLAY_SAMPLES[0].id;
     }
@@ -369,6 +386,16 @@ function load() {
       run();
     });
   }
+
+  var currentToken = 0;
+  function parseHash(firstTime) {
+    var hash = window.location.hash.replace(/^#/, "");
+    if (hash.indexOf("c=") === 0) {
+      return loadContentFromHash(hash.substr(2));
+    } else {
+      return loadSampleFromHash(firstTime, hash);
+    }
+  }
   window.onhashchange = parseHash;
   parseHash(true);
 
@@ -384,6 +411,15 @@ function load() {
     doc.open();
     doc.write(html || code);
     doc.close();
+  }
+
+  function share() {
+    var c = {
+      html: data.html.model.getValue(),
+      json: data.json.model.getValue(),
+    };
+    var hash = btoa(JSON.stringify(c));
+    window.location.hash = "c=" + hash;
   }
 
   function run() {
