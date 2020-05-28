@@ -346,6 +346,20 @@ function load() {
     },
   });
 
+  function loadGistFromHash(gistId) {
+    xhr("https://api.github.com/gists/" + gistId)
+      .then(function (response) {
+        var gist = JSON.parse(response.responseText);
+        var html = gist.files["sample.html"].content;
+        var json = gist.files["sample.json"].content;
+        data.json.model.setValue(json);
+        data.html.model.setValue(html);
+        editor.setScrollTop(0);
+        run();
+      })
+      .catch(console.error);
+  }
+
   function loadContentFromHash(content) {
     var json = atob(content);
     var model = JSON.parse(json);
@@ -391,6 +405,8 @@ function load() {
     var hash = window.location.hash.replace(/^#/, "");
     if (hash.indexOf("c=") === 0) {
       return loadContentFromHash(hash.substr(2));
+    } else if (hash.indexOf("g=") === 0) {
+      return loadGistFromHash(hash.substr(2));
     } else {
       return loadSampleFromHash(firstTime, hash);
     }
