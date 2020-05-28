@@ -1,8 +1,7 @@
 import * as monaco from "monaco-editor";
 import { Liquid } from "liquidjs";
 import PLAY_SAMPLES from "./samples";
-import "bootstrap/dist/css/bootstrap.css";
-import "./styles/playground.css";
+import "./styles.css";
 
 var isMac = /Mac/i.test(navigator.userAgent);
 
@@ -188,7 +187,7 @@ function load() {
     tabArea.appendChild(runBtn);
 
     var shareBtn = document.createElement("button");
-    shareBtn.className = "action run";
+    shareBtn.className = "action share";
     shareBtn.setAttribute("role", "button");
     shareBtn.setAttribute("aria-label", runLabel);
     shareBtn.appendChild(document.createTextNode("Share"));
