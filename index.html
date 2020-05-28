@@ -3,8 +3,18 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="https://shopify.github.io/liquid/images/icons/water-drop-32x.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://shopify.github.io/liquid/images/icons/water-drop-64x.png" sizes="64x64">
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://shopify.github.io/liquid/images/icons/water-drop-32x.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://shopify.github.io/liquid/images/icons/water-drop-64x.png"
+      sizes="64x64"
+    />
 
     <title>Liquid Playground</title>
   </head>
@@ -13,20 +23,22 @@
       <a class="navbar-brand" href="#">Liquid Playground</a>
     </nav>
 
-    <main role="main" class="container">
+    <main role="main" class="container-fluid">
+      <p class="intro">
+        A simple tool for testing out
+        <a href="https://shopify.github.io/liquid/">Liquid</a> in the browser.
+      </p>
       <section id="playground"></section>
     </main>
     <footer class="text-muted">
       <div class="container">
         <p>
-          A simple tool for testing out Liquid in the browser.
-        </p>
-        <p>
-          Created by <a href="https://ntotten.com">Nate Totten</a>, based of
+          Created by <a href="https://ntotten.com">Nathan Totten</a>, based of
           source from the
           <a href="https://microsoft.github.io/monaco-editor/playground.html"
             >Monaco Editor playground</a
-          >.
+          >. Uses <a href="https://liquidjs.com/">LiquidJs</a> for rendering.
+          Hosted on <a href="https://vercel.com/">Vercel</a>.
         </p>
       </div>
     </footer>
