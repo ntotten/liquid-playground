@@ -1,6 +1,6 @@
 import * as monaco from "monaco-editor";
 import { Liquid } from "liquidjs";
-import PLAY_SAMPLES from "./samples";
+import PLAY_SAMPLES from "./samples/basics";
 import "./styles.css";
 
 var isMac = /Mac/i.test(navigator.userAgent);
@@ -157,7 +157,7 @@ function load() {
     tabArea.className = "tabArea";
 
     var htmlTab = document.createElement("span");
-    htmlTab.className = "tab";
+    htmlTab.className = "tab active";
     htmlTab.appendChild(document.createTextNode("HTML"));
     htmlTab.onclick = function () {
       changeTab(htmlTab, "html");
@@ -165,7 +165,7 @@ function load() {
     tabArea.appendChild(htmlTab);
 
     var jsonTab = document.createElement("span");
-    jsonTab.className = "tab active";
+    jsonTab.className = "tab";
     jsonTab.appendChild(document.createTextNode("JSON"));
     jsonTab.onclick = function () {
       changeTab(jsonTab, "json");
