@@ -1,0 +1,127 @@
+<h2>for</h2>
+
+{% for product in collection.products %}
+  {{ product.title }}
+{% endfor %}
+
+<h2>else</h2>
+
+{% for product in collection.products %}
+  {{ product.title }}
+{% else %}
+  The collection is empty.
+{% endfor %}
+
+<h2>break</h2>
+
+{% for i in (1..5) %}
+  {% if i == 4 %}
+    {% break %}
+  {% else %}
+    {{ i }}
+  {% endif %}
+{% endfor %}
+
+<h2>continue</h2>
+
+{% for i in (1..5) %}
+  {% if i == 4 %}
+    {% continue %}
+  {% else %}
+    {{ i }}
+  {% endif %}
+{% endfor %}
+
+<h2>limit</h2>
+
+<!-- if array = [1,2,3,4,5,6] -->
+{% for item in array limit:2 %}
+  {{ item }}
+{% endfor %}
+
+<h2>offset</h2>
+
+{% for item in array offset:2 %}
+  {{ item }}
+{% endfor %}
+
+<h2>range</h2>
+
+{% for i in (3..5) %}
+  {{ i }}
+{% endfor %}
+
+{% assign num = 4 %}
+{% for i in (1..num) %}
+  {{ i }}
+{% endfor %}
+
+<h2>reversed</h2>
+
+{% for item in array reversed %}
+  {{ item }}
+{% endfor %}
+
+<h2>cycle</h2>
+
+{% cycle "one", "two", "three" %}
+{% cycle "one", "two", "three" %}
+{% cycle "one", "two", "three" %}
+{% cycle "one", "two", "three" %}
+
+<h2>cycle (parameters)</h2>
+
+{% cycle "first": "one", "two", "three" %}
+{% cycle "second": "one", "two", "three" %}
+{% cycle "second": "one", "two", "three" %}
+{% cycle "first": "one", "two", "three" %}
+
+<h2>tablerow</h2>
+
+<table>
+  {% tablerow product in collection.products %}
+    {{ product.title }}
+  {% endtablerow %}
+</table>
+
+<h2>tablerow (parameters)</h2>
+
+<h3>cols</h3>
+
+{% tablerow product in collection.products cols:2 %}
+  {{ product.title }}
+{% endtablerow %}
+
+<h3>limit</h3>
+
+{% tablerow product in collection.products cols:2 limit:3 %}
+  {{ product.title }}
+{% endtablerow %}
+
+<h3>offset</h3>
+
+{% tablerow product in collection.products cols:2 offset:3 %}
+  {{ product.title }}
+{% endtablerow %}
+
+<h3>range</h3>
+
+<!--variable number example-->
+
+{% assign num = 4 %}
+<table>
+{% tablerow i in (1..num) %}
+  {{ i }}
+{% endtablerow %}
+</table>
+
+<!--literal number example-->
+
+<table>
+{% tablerow i in (3..5) %}
+  {{ i }}
+{% endtablerow %}
+</table>
+
+
+

@@ -1,0 +1,15 @@
+<h2>Objects</h2>
+
+{{ page.title }}
+
+<h2>Tags</h2>
+
+{% if user %}
+  Hello {{ user.name }}!
+{% endif %}
+
+<h2>Filters</h2>
+
+{{ "/my/fancy/url" | append: ".html" }}
+
+{{ "adam!" | capitalize | prepend: "Hello " }}

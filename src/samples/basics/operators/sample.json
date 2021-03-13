@@ -1,5 +1,7 @@
 {
   "product": {
-    "title": "Awesome Shoes"
+    "title": "Awesome Shoes",
+    "type": "Shirt",
+    "tags": ["Hello"]
   }
 }

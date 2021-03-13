@@ -1,0 +1,37 @@
+<h2>if</h2>
+
+{% if product.title == "Awesome Shoes" %}
+  These shoes are awesome!
+{% endif %}
+
+<h2>unless</h2>
+
+{% unless product.title == "Awesome Shoes" %}
+  These shoes are not awesome.
+{% endunless %}
+
+{% if product.title != "Awesome Shoes" %}
+  These shoes are not awesome.
+{% endif %}
+
+<h2>elsif/else</h2>
+
+{% if customer.name == "kevin" %}
+  Hey Kevin!
+{% elsif customer.name == "anonymous" %}
+  Hey Anonymous!
+{% else %}
+  Hi Stranger!
+{% endif %}
+
+<h2>case/when</h2>
+
+{% assign handle = "cake" %}
+{% case handle %}
+  {% when "cake" %}
+     This is a cake
+  {% when "cookie" %}
+     This is a cookie
+  {% else %}
+     This is not a cake nor a cookie
+{% endcase %}

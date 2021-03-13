@@ -1,0 +1,32 @@
+
+<h2>String</h2>
+
+{% assign my_string = "Hello World!" %}
+
+<h2>Number</h2>
+
+{% assign my_int = 25 %}
+{% assign my_float = 39.756 %}
+
+<h2>Boolean</h2>
+
+{% assign foo = true %}
+{% assign bar = false %}
+
+<h2>Nil</h2>
+
+{% if user %}
+  Hello {{ user.name }}!
+{% endif %}
+
+The current user is {{ user.name }}
+
+<h2>Array</h2>
+
+{% for user in site.users %}
+  {{ user }}
+{% endfor %}
+
+{{ site.users[0] }}
+{{ site.users[1] }}
+{{ site.users[3] }}

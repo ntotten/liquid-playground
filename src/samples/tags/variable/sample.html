@@ -1,0 +1,30 @@
+<h2>assign</h2>
+
+{% assign my_variable = false %}
+{% if my_variable != true %}
+  This statement is valid.
+{% endif %}
+
+<h2>capture</h2>
+
+{% capture my_variable %}I am being captured.{% endcapture %}
+{{ my_variable }}
+
+<h2>increment</h2>
+
+{% increment my_counter %}
+{% increment my_counter %}
+{% increment my_counter %}
+
+
+{% assign var = 10 %}
+{% increment var %}
+{% increment var %}
+{% increment var %}
+{{ var }}
+
+<h2>decrement</h2>
+
+{% decrement variable %}
+{% decrement variable %}
+{% decrement variable %}
