@@ -1,6 +1,6 @@
 import * as monaco from "monaco-editor";
 import { Liquid } from "liquidjs";
-import PLAY_SAMPLES from "./samples/basics";
+import PLAY_SAMPLES from "./samples";
 import "./styles.css";
 
 var isMac = /Mac/i.test(navigator.userAgent);
