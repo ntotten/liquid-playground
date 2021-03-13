@@ -334,7 +334,7 @@ function load() {
   data.html.model = monaco.editor.createModel("html", "html");
 
   editor = monaco.editor.create(editorContainer, {
-    model: data.json.model,
+    model: data.html.model,
     minimap: {
       enabled: false,
     },
